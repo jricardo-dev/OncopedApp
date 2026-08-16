@@ -24,7 +24,6 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.ufcg.oncopedapp",
-      "enableProguardInReleaseBuilds": true,
       "versionCode": 4,
       "allowBackup": false,
       "permissions": []
