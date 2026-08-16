@@ -1,96 +1,106 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { NativeBaseProvider, Center, Button, extendTheme } from "native-base";
-import React, {useState, useEffect} from 'react';
-import * as Font from 'expo-font';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useFonts } from 'expo-font';
 import Navegacao from '../../features/navegacao/navegacao';
 
-const LinearGradient = require('expo-linear-gradient').LinearGradient;
-const config = {
-  dependencies: {
-    'linear-gradient': LinearGradient
-  }
-};
-
-export default function TelaInicial({ navigation }: any)  {
-  const [loadingFont, setLoadingFont] = useState<boolean>(false);
+export default function TelaInicial({ navigation }: any) {
   Navegacao(0, 'TelaInicial');
- 
-  useEffect(()=>{    
-    async function loadFonts(){
-      await Font.loadAsync({
-        'Montserrat': require("../../assets/fonts/Montserrat-Regular.ttf"),
-        'Montserrat-SemiBold': require('../../assets/fonts/Montserrat-SemiBold.ttf'),
-        'Montserrat-Bold': require('../../assets/fonts/Montserrat-Bold.ttf')
-      }).then(res=>{
-        console.log("FONTS LOADED!");
-        setLoadingFont(true)
-      }).catch(Err=>{
-        setLoadingFont(true);
-        console.log(Err);
-      }); 
-    }
-    loadFonts();
-  },[])
+
+  const [fontsLoaded] = useFonts({
+    'Montserrat': require('../../assets/fonts/Montserrat-Regular.ttf'),
+    'Montserrat-SemiBold': require('../../assets/fonts/Montserrat-SemiBold.ttf'),
+    'Montserrat-Bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#fea9a7" />
+      </View>
+    );
+  }
 
   return (
-    <NativeBaseProvider config={config}>
-      {
-        loadingFont?
-        <Center 
-          style={styles.container}
-          bg={{
-          linearGradient: {
-            colors: ['#fff', '#abcef7'],
-          }
-        }}>
-          <Text style={{ 
-            textTransform: 'uppercase', 
-            color: '#fea9a7', 
-            fontSize: 20}}
-          >
-            Bem vindo à
-          </Text>
-          <Image style={{ width: '80%', height: '18%', resizeMode: 'contain'}} source={require('../../assets/logo_01.png')} />
-          <Button 
-            size={"lg"}
-            style={{ 
-              width: '70%',
-              borderWidth: 3,
-              borderRadius: 15,
-              borderColor: '#fff',
-              backgroundColor: '#fea9a7'}}
-            onPress={() => {
-              console.log("click action");
-              navigation.navigate('ViewInicio');
-            }}
-          >
-            <Text 
-              style={{ 
-                color: "white", 
-                fontSize: 22,
-              }}
-            >
-              Entrar
-            </Text>
-          </Button>
-          <StatusBar style="auto" />
-        </Center>
-        : <></>
-      }       
-    </NativeBaseProvider>    
+    <LinearGradient
+      colors={['#ffffff', '#abcef7']}
+      style={styles.container}
+    >
+      <Text style={styles.welcomeText}>
+        Bem vindo à
+      </Text>
+
+      <Image 
+        style={styles.logo} 
+        source={require('../../assets/logo_01.png')} 
+      />
+
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('ViewInicio');
+        }}
+      >
+        <Text style={styles.buttonText}>
+          Entrar
+        </Text>
+      </TouchableOpacity>
+
+      <StatusBar style="auto" />
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     height: '100%',
-    fontFamily: 'Montserrat'
+    paddingHorizontal: 20,
+  },
+  welcomeText: {
+    textTransform: 'uppercase',
+    color: '#fea9a7',
+    fontSize: 22,
+    fontWeight: '700',
+    fontFamily: 'Montserrat-Bold',
+    marginBottom: 20,
+  },
+  logo: {
+    width: '80%',
+    height: 180,
+    resizeMode: 'contain',
+    marginBottom: 40,
+  },
+  button: {
+    width: '70%',
+    paddingVertical: 14,
+    borderWidth: 3,
+    borderRadius: 18,
+    borderColor: '#ffffff',
+    backgroundColor: '#fea9a7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 22,
+    fontWeight: '900',
+    fontFamily: 'Montserrat-Bold',
   },
 });

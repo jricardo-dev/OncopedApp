@@ -15,20 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ufcg.oncopedapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#fff"
+        "backgroundColor": "#ffffff"
       },
       "package": "com.ufcg.oncopedapp",
       "enableProguardInReleaseBuilds": true,
-      "versionCode": 3
+      "versionCode": 3,
+      "allowBackup": false,
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [
+      "expo-asset"
+    ],
     "extra": {
       "eas": {
         "projectId": "ed6ab49e-13c8-476d-ba5f-601e39776930"

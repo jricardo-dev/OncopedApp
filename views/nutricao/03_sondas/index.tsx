@@ -1,409 +1,252 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, Image, Text, TouchableOpacity, BackHandler } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { VStack, Spacer, Center, NativeBaseProvider, Button} from "native-base";
-import React, {useState, useEffect} from 'react';
-import { Icon } from '@rneui/themed';
+import React from 'react';
+import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import Navegacao from '../../../features/navegacao/navegacao';
 
-export default function ViewSondasNutricao({ navigation }: any){
-    const [ newHeightView1, setNewHeightView1 ] = useState<number>(0);
-    const [ newHeightView2, setNewHeightView2 ] = useState<number>(0);
-    Navegacao(31, 'ViewSondasNutricao'); 
-    return (
-        <NativeBaseProvider>
-            <View
-                style={{
-                    backgroundColor: '#96b9e0',
-                    width: '100%',
-                    height: '20%',
-                    borderBottomColor: '#d2d9e2',
-                    borderBottomWidth: 10,
-                }}
-            >
-                <Text 
-                    style={{ 
-                        color: "white", 
-                        fontSize: 19, 
-                        textTransform: 'uppercase',
-                        textAlign: 'center',
-                        marginTop: '10%',
-                        marginBottom: 20
-                    }}
-                >
-                    {" "}
-                </Text> 
-                <Text 
-                    style={{ 
-                        color: "white", 
-                        fontSize: 30, 
-                        textTransform: 'uppercase',
-                        textAlign: 'center',
-                        marginBottom: 20
-                    }}
-                >
-                    Nutrição
+const SONDA_ILLUSTRATIONS = [
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_2.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_3.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_4.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_5.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_6.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_7.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_8.png'),
+  require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_9.png'),
+];
+
+export default function ViewSondasNutricao({ navigation }: any) {
+  Navegacao(31, 'ViewSondasNutricao'); 
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerCategory}>{" "}</Text> 
+        <Text style={styles.headerTitle}>Nutrição</Text>
+      </View>
+
+      <View style={styles.contentContainer}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Badge Principal */}
+          <View style={styles.mainBadge}>
+            <Text style={styles.mainBadgeText}>
+              Sondas{"\n"}alimentares
+            </Text> 
+          </View>
+
+          {/* O que é */}
+          <View style={styles.sectionContainer}>
+            <Image               
+              style={styles.heroImage}                
+              source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_1.png')} 
+            />
+
+            <View style={styles.subBadge}>
+              <Text style={styles.subBadgeText}>O que é:</Text>  
+            </View>
+
+            <View style={styles.textCard}>
+              <Text style={styles.bodyText}>
+                É um tubo usado para alimentar e introduzir os medicamentos necessários ao tratamento, pelo nariz, descendo até o estômago ou intestino. É necessária, por um determinado período, quando há dificuldades para engolir ou digerir o alimento.
+              </Text>
+            </View>
+          </View>
+
+          {/* Cuidados essenciais */}
+          <View style={[styles.sectionContainer, { marginTop: 25 }]}>
+            <View style={styles.subBadge}>
+              <Text style={styles.subBadgeText}>Cuidados essenciais</Text>  
+            </View>
+
+            <View style={[styles.textCard, { paddingTop: 40 }]}>
+              <View style={styles.bulletItem}>
+                <FontAwesome name="arrow-right" size={14} color="#5e718b" />
+                <Text style={styles.bulletText}>
+                  {" "}O paciente e seus familiares devem receber instruções da equipe de Enfermagem sobre como usar a sonda e indicar o material para introdução dos alimentos, que devem ser lavados com água e sabão antes e após seu uso;
                 </Text>
+              </View>
+              <View style={styles.bulletItem}>
+                <FontAwesome name="arrow-right" size={14} color="#5e718b" />
+                <Text style={styles.bulletText}>
+                  {" "}Em caso de entupimento por alimentos ou remédios e a saída acidental pelo nariz, é necessário buscar a equipe especializada no hospital de tratamento.
+                </Text>
+              </View>
             </View>
-            <View
-                style={{
-                    backgroundColor: '#fff',
-                    borderLeftColor: '#d2d9e2',
-                    borderLeftWidth: 10,
-                    borderRightColor: '#d2d9e2',
-                    borderRightWidth: 10,
-                    height: '80%'
-                }}
-            >
-                 <ScrollView
-                    style={{
-                        height: '80%'
-                    }}
-                 >
-                    <VStack 
-                        style={{marginTop: 20, width: '100%', height: '100%'}}
-                    >
-                        <Center> 
-                            <Button
-                                style={{
-                                    width: '80%',
-                                    height: 90,
-                                    borderRadius: 70,
-                                    backgroundColor: '#fea9a7'
-                                }}
-                            >
-                                <Text 
-                                    style={{ 
-                                        color: "white", 
-                                        fontSize: 19, 
-                                        fontWeight: '900', 
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    Sondas 
-                                    alimentares
-                                </Text> 
-                            </Button>
-                        </Center>
-                        <Center> 
-                            <TouchableOpacity                            
-                                activeOpacity={0.5}
-                                style={{ width: '60%', marginVertical: 10}}
-                            >                            
-                                <Image               
-                                    style={{
-                                        width: '100%',
-                                        height: undefined,
-                                        aspectRatio: 1,
-                                        resizeMode: 'contain'
-                                    }}                 
-                                    source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_1.png')} 
-                                />
-                            </TouchableOpacity>
-                            <View
-                                style={{
-                                    width: '100%',
-                                    marginTop: 10,
-                                    height: 0
-                                }}
-                            >
-                                <View style={{
-                                    zIndex: 4,
-                                    width: '100%',
-                                    position: 'absolute',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                    <Button
-                                        style={{
-                                            width: '60%',
-                                            height: 50,
-                                            borderRadius: 70,
-                                            backgroundColor: '#96b9e0'
-                                        }}
-                                    >
-                                        <Text 
-                                            style={{  
-                                                fontSize: 19, 
-                                                fontWeight: '900',
-                                                color: '#5e718b',
-                                            }}
-                                        >
-                                            O que é:
-                                        </Text>  
-                                    </Button>
-                                </View>
-                                <View
-                                    style={{
-                                        backgroundColor: '#edeff3',
-                                        zIndex: 3,
-                                        marginTop: 25,
-                                        position: 'absolute',
-                                        borderRadius: 30,
-                                        marginHorizontal: '10%',          
-                                    }}
-                                    onLayout={({ nativeEvent }) => {
-                                        const { x, y, width, height } = nativeEvent.layout;
-                                        //console.log('view1', height);
-                                        setNewHeightView1(height);                                       
-                                    }}
-                                >
-                                    <View
-                                        style={{
-                                            backgroundColor: '#edeff3', 
-                                            paddingHorizontal: 20,
-                                            paddingTop: 35,
-                                            paddingBottom: 20,
-                                            borderRadius: 100,
-                                            flex: 1
-                                        }}
-                                    >
-                                        <Text 
-                                            style={{ 
-                                                color: '#5e718b',
-                                                fontSize: 18, 
-                                                fontWeight: '900', 
-                                                textAlign: 'center'
-                                            }}
-                                        >
-                                            É um tubo usado para 
-                                            alimentar e introduzir os 
-                                            medicamentos necessários 
-                                            ao tratamento, pelo nariz, 
-                                            descendo até o estômago ou 
-                                            intestino. É necessária, por 
-                                            um determinado período, 
-                                            quando há dificuldades para 
-                                            engolir ou digerir o alimento.
-                                        </Text>
-                                    </View>
-                                </View> 
-                            </View>
-                        </Center>
-                        <Center>
-                            <View
-                                style={{
-                                    width: '100%',
-                                    marginTop: newHeightView1 + 50,
-                                    height: newHeightView2 + 50,
-                                }}
-                            >
-                                <View style={{
-                                    zIndex: 4,
-                                    width: '100%',
-                                    position: 'absolute',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                    <Button
-                                        style={{
-                                            width: '60%',
-                                            height: 50,
-                                            borderRadius: 70,
-                                            backgroundColor: '#96b9e0'
-                                        }}
-                                    >
-                                        <Text 
-                                            style={{  
-                                                fontSize: 19, 
-                                                fontWeight: '900',
-                                                color: '#5e718b',
-                                                textAlign: 'center'
-                                            }}
-                                        >
-                                            Cuidados essenciais
-                                        </Text>  
-                                    </Button>
-                                </View>
-                                <View
-                                    style={{
-                                        backgroundColor: '#edeff3',
-                                        zIndex: 3,
-                                        marginTop: 25,
-                                        position: 'absolute',
-                                        borderRadius: 30,
-                                        marginHorizontal: '10%',
-                                        marginBottom: 20    
-                                    }}
-                                    onLayout={({ nativeEvent }) => {
-                                        const { x, y, width, height } = nativeEvent.layout;
-                                        //console.log('view2', height);
-                                        setNewHeightView2(height);                                       
-                                    }}
-                                >
-                                    <View
-                                        style={{
-                                            backgroundColor: '#edeff3', 
-                                            paddingHorizontal: 20,
-                                            paddingTop: 30,
-                                            paddingBottom: 20,
-                                            borderRadius: 100,
-                                            flex: 1
-                                        }}
-                                    >
-                                        <Text 
-                                            style={{ 
-                                                color: '#5e718b',
-                                                fontSize: 18, 
-                                                fontWeight: '900', 
-                                                textAlign: 'center',
-                                                marginBottom: 20
-                                            }}
-                                        >
-                                            <Icon
-                                                size={14}
-                                                name='arrow-right'
-                                                type='font-awesome'
-                                                color='#5e718b'
-                                            /> 
-                                            <Text>
-                                                {" "}O paciente e seus 
-                                                familiares devem receber 
-                                                instruções da equipe de 
-                                                Enfermagem sobre como 
-                                                usar a sonda e indicar o 
-                                                material para introdução dos 
-                                                alimentos, que devem ser 
-                                                lavados com água e sabão 
-                                                antes e após seu uso;
-                                            </Text>
-                                        </Text>
-                                        <Text 
-                                            style={{ 
-                                                color: '#5e718b',
-                                                fontSize: 18, 
-                                                fontWeight: '900', 
-                                                textAlign: 'center'
-                                            }}
-                                        >
-                                            <Icon
-                                                size={14}
-                                                name='arrow-right'
-                                                type='font-awesome'
-                                                color='#5e718b'
-                                            /> 
-                                            <Text>
-                                                {" "}Em caso de entupimento 
-                                                por alimentos ou remédios e 
-                                                a saída acidental pelo nariz, 
-                                                é necessário buscar a equipe 
-                                                especializada no hospital de 
-                                                tratamento.
-                                            </Text>  
-                                        </Text>
-                                    </View>
-                                </View> 
-                            </View>
-                        </Center>
-                        <Center>
-                            <View
-                                style={{
-                                    backgroundColor: '#96b9e0', 
-                                    padding: 20,
-                                    borderRadius: 30,
-                                    flex: 1,
-                                    width: '80%',
-                                    marginHorizontal: '10%',
-                                    marginBottom: 20
-                                }}
-                            >
-                                <Text 
-                                    style={{ 
-                                        color: '#5e718b',
-                                        fontSize: 18, 
-                                        fontWeight: '900', 
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    Deve-se comunicar
-                                    imediatamente a equipe de
-                                    saúde a ocorrência de febre
-                                </Text>
-                            </View>
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_2.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_3.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_4.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_5.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_6.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_7.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_8.png')} 
-                            />
-                            <Image               
-                                style={{
-                                    width: '100%',
-                                    height: undefined,
-                                    aspectRatio: 1,
-                                    resizeMode: 'contain',
-                                    marginBottom: 20
-                                }}                
-                                source={require('../../../assets/ICO_NUTRICAO/SONDAS/SONDAS_9.png')} 
-                            />
-                        </Center>
-                    </VStack>
-                 </ScrollView>
+          </View>
+
+          {/* Alerta de febre */}
+          <View style={styles.alertCard}>
+            <Text style={styles.alertText}>
+              Deve-se comunicar imediatamente a equipe de saúde a ocorrência de febre
+            </Text>
+          </View>
+
+          {/* Imagens instrutivas */}
+          {SONDA_ILLUSTRATIONS.map((imgSrc, index) => (
+            <View key={index} style={styles.imageItemContainer}>
+              <Image               
+                style={styles.instructionImage}                
+                source={imgSrc} 
+              />
             </View>
-        </NativeBaseProvider>        
-    );
+          ))}
+        </ScrollView>
+      </View>
+    </View>        
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#96b9e0',
+  },
+  header: {
+    backgroundColor: '#96b9e0',
+    width: '100%',
+    paddingTop: 35,
+    paddingBottom: 15,
+    borderBottomColor: '#d2d9e2',
+    borderBottomWidth: 10,
+    alignItems: 'center',
+  },
+  headerCategory: {
+    color: '#ffffff', 
+    fontSize: 18, 
+    textTransform: 'uppercase',
+  },
+  headerTitle: {
+    color: '#ffffff', 
+    fontSize: 28, 
+    fontWeight: '900', 
+    textTransform: 'uppercase',
+    marginTop: 5,
+  },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    borderLeftColor: '#d2d9e2',
+    borderLeftWidth: 10,
+    borderRightColor: '#d2d9e2',
+    borderRightWidth: 10,
+  },
+  scrollContent: {
+    paddingTop: 20,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  mainBadge: {
+    width: '80%',
+    minHeight: 70,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    borderRadius: 35,
+    backgroundColor: '#fea9a7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 3,
+    marginBottom: 15,
+  },
+  mainBadgeText: {
+    color: '#ffffff', 
+    fontSize: 19, 
+    fontWeight: '900', 
+    textAlign: 'center',
+    lineHeight: 25,
+  },
+  sectionContainer: {
+    width: '90%',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  heroImage: {
+    width: '65%',
+    height: 180,
+    resizeMode: 'contain',
+    marginBottom: 10,
+  },
+  subBadge: {
+    width: '65%',
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#96b9e0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 2,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+  },
+  subBadgeText: {
+    fontSize: 18, 
+    fontWeight: '900',
+    color: '#5e718b',
+    textAlign: 'center',
+  },
+  textCard: {
+    backgroundColor: '#edeff3',
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    paddingTop: 35,
+    paddingBottom: 20,
+    marginTop: -24,
+    width: '100%',
+    zIndex: 1,
+  },
+  bodyText: {
+    color: '#5e718b',
+    fontSize: 17, 
+    fontWeight: '800', 
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  bulletItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 15,
+    paddingHorizontal: 5,
+  },
+  bulletText: {
+    color: '#5e718b',
+    fontSize: 16, 
+    fontWeight: '800', 
+    lineHeight: 23,
+    flex: 1,
+    marginLeft: 8,
+  },
+  alertCard: {
+    backgroundColor: '#96b9e0', 
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    width: '85%',
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  alertText: {
+    color: '#5e718b',
+    fontSize: 17, 
+    fontWeight: '900', 
+    textAlign: 'center',
+    lineHeight: 23,
+  },
+  imageItemContainer: {
+    width: '85%',
+    marginVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  instructionImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+  },
+});

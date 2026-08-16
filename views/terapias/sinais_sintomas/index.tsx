@@ -1,477 +1,149 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, Image, Text, BackHandler } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { VStack, Center, NativeBaseProvider, Button} from "native-base";
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
 import Navegacao from '../../../features/navegacao/navegacao';
 
-export default function ViewSinaisSintomas({ navigation }: any){
-    Navegacao(12, 'ViewSinaisSintomas');
-    
-    return (
-        <NativeBaseProvider>
-            <View style={{
-                backgroundColor: '#fea9a7',
-                zIndex: -999,
-                height: '100%',
-                width: '100%',
-                position: 'absolute'
-            }}>
-                <View 
-                    style={{
-                        backgroundColor: '#fff',
-                        height: '75%',
-                        width: '100%',
-                        marginTop: '25%',
-                        borderTopRightRadius: 70,
-                        borderTopLeftRadius: 70,
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0
-                    }}
-                />
-            </View>
-            <View style={{
-                backgroundColor: 'transparent'
-            }}>
-                <Center 
-                    style={{
-                        width: '100%',
-                        height: 300
-                    }}
-                >
-                    <Image               
-                        style={{
-                            marginTop: '20%',
-                            height: 220,
-                            marginHorizontal: '20%',
-                            resizeMode: 'contain' 
-                        }}                
-                        source={require('../../../assets/ico_btn_sinais_sintomas.png')} 
-                    />
-                </Center>
-                <View
-                    style={{
-                        height: '62%',
-                        backgroundColor: 'transparent'
-                    }}
-                >
-                    <ScrollView>
-                        <VStack 
-                            space={4} 
-                            alignItems="center"
-                            style={{marginTop: 10, width: '100%'}}
-                        >
-                            <Center style={{ width: '100%' }}>
-                                <Text style={{ color: '#fea9a7', fontSize: 18, fontWeight: '900' }}>Selecione a opção</Text>
-                                <Text style={{ color: '#fea9a7', fontSize: 18, fontWeight: '900' }}>que você deseja saber</Text>
-                                <Text style={{ color: '#fea9a7', fontSize: 18, fontWeight: '900' }}>mais informações</Text>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        borderRadius: 70,
-                                        paddingVertical: 15,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewFebreSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Febre
-                                    </Text> 
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewDorSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Dor
-                                    </Text> 
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewFadigaCansacoSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Fadiga / cansaço
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewNauseaVomitoSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Nausea e Vômito
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewDisturbiosSonoSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Distúrbios do sono
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewDiarreiaSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Diarréia
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewConstipacaoSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Constipação
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewDisturbiosPsicoemocionaisSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Distúrbios Psicoemocionais
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewConvulsoesSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Convulsões
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewDisturbiosSensoriaisSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Distúrbios Sensoriais
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewMucoseOralSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Mucose Oral
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewAnorexiaSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Anorexia
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewNeuropatiasSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Neuropatias
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewSangramentosSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Sangramentos
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0'
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewFaltaArSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Falta de Ar
-                                    </Text>
-                                </Button>
-                            </Center>
-                            <Center style={{ width: '100%' }}>
-                                <Button
-                                    style={{
-                                        width: '70%',
-                                        paddingVertical: 15,
-                                        borderRadius: 70,
-                                        backgroundColor: '#96b9e0',
-                                        marginBottom: 20
-                                    }}
-                                    onPress={() => {
-                                        console.log("click action");
-                                        navigation.navigate('ViewAlopeciaSinaisSintomas');
-                                    }}
-                                >
-                                    <Text 
-                                        style={{ 
-                                            color: "white", 
-                                            fontSize: 19, 
-                                            fontWeight: '900', 
-                                            textAlign: 'center' 
-                                        }}
-                                    >
-                                        Alopécia
-                                    </Text>
-                                </Button>
-                            </Center>
-                        </VStack>
-                    </ScrollView> 
-                </View>                 
-            </View>            
-        </NativeBaseProvider>        
-    );
+const SYMPTOMS = [
+  { id: 1, title: 'Febre', route: 'ViewFebreSinaisSintomas' },
+  { id: 2, title: 'Dor', route: 'ViewDorSintomas' },
+  { id: 3, title: 'Fadiga / cansaço', route: 'ViewFadigaCansacoSinaisSintomas' },
+  { id: 4, title: 'Nausea e Vômito', route: 'ViewNauseaVomitoSinaisSintomas' },
+  { id: 5, title: 'Distúrbios do sono', route: 'ViewDisturbiosSonoSinaisSintomas' },
+  { id: 6, title: 'Diarréia', route: 'ViewDiarreiaSinaisSintomas' },
+  { id: 7, title: 'Constipação', route: 'ViewConstipacaoSinaisSintomas' },
+  { id: 8, title: 'Distúrbios Psicoemocionais', route: 'ViewDisturbiosPsicoemocionaisSinaisSintomas' },
+  { id: 9, title: 'Convulsões', route: 'ViewConvulsoesSinaisSintomas' },
+  { id: 10, title: 'Distúrbios Sensoriais', route: 'ViewDisturbiosSensoriaisSinaisSintomas' },
+  { id: 11, title: 'Mucosite Oral', route: 'ViewMucoseOralSinaisSintomas' },
+  { id: 12, title: 'Anorexia', route: 'ViewAnorexiaSinaisSintomas' },
+  { id: 13, title: 'Neuropatias', route: 'ViewNeuropatiasSinaisSintomas' },
+  { id: 14, title: 'Sangramentos', route: 'ViewSangramentosSinaisSintomas' },
+  { id: 15, title: 'Falta de Ar', route: 'ViewFaltaArSinaisSintomas' },
+  { id: 16, title: 'Alopécia', route: 'ViewAlopeciaSinaisSintomas' },
+];
+
+export default function ViewSinaisSintomas({ navigation }: any) {
+  Navegacao(12, 'ViewSinaisSintomas');
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.backgroundPink}>
+        <View style={styles.bottomWhiteCard} />
+      </View>
+
+      <View style={styles.headerIconContainer}>
+        <Image               
+          style={styles.headerIcon}                
+          source={require('../../../assets/ico_btn_sinais_sintomas.png')} 
+        />
+      </View>
+
+      <View style={styles.menuContainer}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.titleContainer}>
+            <Text style={styles.instructionText}>Selecione a opção</Text>
+            <Text style={styles.instructionText}>que você deseja saber</Text>
+            <Text style={styles.instructionText}>mais informações</Text>
+          </View>
+
+          {SYMPTOMS.map((item, index) => (
+            <TouchableOpacity
+              key={item.id}
+              activeOpacity={0.7}
+              style={[
+                styles.menuButton,
+                index === SYMPTOMS.length - 1 && styles.lastMenuButton,
+              ]}
+              onPress={() => {
+                navigation.navigate(item.route);
+              }}
+            >
+              <Text style={styles.menuButtonText}>{item.title}</Text> 
+            </TouchableOpacity>
+          ))}
+        </ScrollView> 
+      </View>                 
+    </View>            
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  backgroundPink: {
+    backgroundColor: '#fea9a7',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+  },
+  bottomWhiteCard: {
+    backgroundColor: '#ffffff',
+    height: '75%',
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    borderTopRightRadius: 70,
+    borderTopLeftRadius: 70,
+  },
+  headerIconContainer: {
+    width: '100%',
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerIcon: {
+    marginTop: 40,
+    height: 220,
+    width: '60%',
+    resizeMode: 'contain',
+  },
+  menuContainer: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingTop: 10,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  titleContainer: {
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  instructionText: {
+    color: '#fea9a7',
+    fontSize: 18,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  menuButton: {
+    width: '75%',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 70,
+    backgroundColor: '#96b9e0',
+    marginVertical: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  lastMenuButton: {
+    marginBottom: 30,
+  },
+  menuButtonText: {
+    color: '#ffffff', 
+    fontSize: 18, 
+    fontWeight: '900', 
+    textAlign: 'center',
+  },
+});

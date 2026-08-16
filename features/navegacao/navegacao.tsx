@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import { useAppDispatch, useAppSelector } from "../../app/hooks/hooks";
-import { PaginaAtual, alterarPagina, paginaSelector } from "../pagina_atual/paginaAtualSlice";
+import { useEffect } from 'react';
+import { useAppDispatch } from "../../app/hooks/hooks";
+import { PaginaAtual, alterarPagina } from "../pagina_atual/paginaAtualSlice";
 
-export default function Navegacao(idPag: number, nmPag: string){    
-    const pag: PaginaAtual = {
-        id: idPag,
-        nome: nmPag
-    }
+/**
+ * Hook para sincronizar a página atual no Redux de maneira segura (dentro de useEffect)
+ */
+export default function Navegacao(idPag: number, nmPag: string) {
     const dispatch = useAppDispatch();
-    dispatch(alterarPagina(pag));
-    console.log('pagina alterada para: ', idPag, ', ', nmPag);
+
+    useEffect(() => {
+        const pag: PaginaAtual = {
+            id: idPag,
+            nome: nmPag
+        };
+        dispatch(alterarPagina(pag));
+    }, [idPag, nmPag, dispatch]);
 }

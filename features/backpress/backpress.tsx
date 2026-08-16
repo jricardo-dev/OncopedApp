@@ -1,61 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import React, {useState, useEffect} from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
-import { PaginaAtual, alterarPagina, paginaSelector } from "../pagina_atual/paginaAtualSlice";
-//import { navigationRef } from '../../Index';
 
-// export default function useBackButton(handler: any) {    
-//     //const dispatch = useAppDispatch();
-//     // const viewSel = useAppSelector(paginaSelector);
-//     // const [ navegacao, setNavegacao ] = useState<PaginaAtual>();
-
-//     // useEffect(() => {
-//     //   setNavegacao(viewSel);
-//     //   console.log('useeffect', viewSel.id, viewSel.nome)
-
-//     // }, [viewSel])
-
-//   useEffect(() => {
-//     BackHandler.addEventListener("hardwareBackPress", handler);
-
-//     return () => {
-//       BackHandler.removeEventListener(
-//         "hardwareBackPress",
-//         handler
-//       );
-//     };
-
-//   }, [handler]);
-// }
-
-// export const ViewReturnedInBackPress = (idd: number): string => {
-//   const viewSel = useAppSelector(paginaSelector);
-//   const id = viewSel.id;
-
-//   if (id === 1)
-//     return "ViewInicio";  
-
-//   else if (id >= 2 && id <= 3)
-//     return "ViewPrincipal";
-
-//   else if (id === 4 || id === 8 || id === 12)
-//     return "ViewTerapias";
-
-//   else if (id >= 5 && id <= 7)
-//     return "ViewQuimioterapia";
-
-//   else if (id >= 9 && id <= 11)
-//     return "ViewRadioterapia";
-
-//   else if (id >= 13 && id <= 28)
-//     return "ViewSinaisSintomas";
-  
-//   else if (id >= 29 && id <= 31)
-//     return "ViewNutricao";
-
-//   else
-//     return "TelaInicial";
-// }
+/**
+ * Hook utilitário para escutar o botão de voltar físico no Android
+ */
+export function useBackButton(handler: () => boolean) {
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', handler);
+    return () => subscription.remove();
+  }, [handler]);
+}
