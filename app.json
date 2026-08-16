@@ -2,7 +2,7 @@
   "expo": {
     "name": "Oncoped",
     "slug": "OncopedApp",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
       },
       "package": "com.ufcg.oncopedapp",
       "enableProguardInReleaseBuilds": true,
-      "versionCode": 3,
+      "versionCode": 4,
       "allowBackup": false,
       "permissions": []
     },
