@@ -44,6 +44,7 @@ import ViewMitosNutricao from './views/nutricao/02_mitos';
 import ViewSondasNutricao from './views/nutricao/03_sondas';
 import ViewBaixar from './views/baixar';
 import WebTopNavigationBar from './components/WebTopNavigationBar';
+import SwipeNavigationHandler from './components/SwipeNavigationHandler';
 
 import { ViewReturnedInBackPress } from './features/backpress/returnedback';
 import { useAppDispatch, useAppSelector } from './app/hooks/hooks';
@@ -425,11 +426,12 @@ export default function Main() {
     >
       <View style={styles.mainContainer}>
         {Platform.OS === 'web' && <WebTopNavigationBar />}
-        <Drawer.Navigator 
-          id="LeftDrawer"
-          initialRouteName="TelaInicial"
-          backBehavior='none'
-          detachInactiveScreens={true}
+        <SwipeNavigationHandler>
+          <Drawer.Navigator 
+            id="LeftDrawer"
+            initialRouteName="TelaInicial"
+            backBehavior='none'
+            detachInactiveScreens={true}
           screenOptions={{
             headerShown: true,
             headerTintColor: '#ffffff',            
@@ -613,7 +615,8 @@ export default function Main() {
           component={ViewBaixar}
           options={{ title: 'Baixar', headerTitleStyle: { display: 'none' } }}
         />
-      </Drawer.Navigator>
+        </Drawer.Navigator>
+        </SwipeNavigationHandler>
       </View>
     </NavigationContainer>
   );
