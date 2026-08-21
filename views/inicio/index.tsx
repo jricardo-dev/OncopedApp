@@ -1,26 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFonts } from 'expo-font';
 import Navegacao from '../../features/navegacao/navegacao';
 
 export default function TelaInicial({ navigation }: any) {
   Navegacao(0, 'TelaInicial');
-
-  const [fontsLoaded] = useFonts({
-    'Montserrat': require('../../assets/fonts/Montserrat-Regular.ttf'),
-    'Montserrat-SemiBold': require('../../assets/fonts/Montserrat-SemiBold.ttf'),
-    'Montserrat-Bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
-  });
-
-  if (!fontsLoaded) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#fea9a7" />
-      </View>
-    );
-  }
 
   return (
     <LinearGradient
@@ -54,12 +39,6 @@ export default function TelaInicial({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
-  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -78,12 +57,15 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '80%',
-    height: 180,
+    maxWidth: 440,
+    height: 200,
+    maxHeight: 220,
     resizeMode: 'contain',
     marginBottom: 40,
   },
   button: {
     width: '70%',
+    maxWidth: 320,
     paddingVertical: 14,
     borderWidth: 3,
     borderRadius: 18,

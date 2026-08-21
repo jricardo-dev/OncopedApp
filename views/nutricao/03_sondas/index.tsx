@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Navegacao from '../../../features/navegacao/navegacao';
 
@@ -27,7 +27,7 @@ export default function ViewSondasNutricao({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           {/* Badge Principal */}
           <View style={styles.mainBadge}>
@@ -166,8 +166,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   heroImage: {
-    width: '65%',
-    height: 180,
+    width: '75%',
+    maxWidth: 360,
+    height: 240,
+    maxHeight: 360,
     resizeMode: 'contain',
     marginBottom: 10,
   },
@@ -246,7 +248,9 @@ const styles = StyleSheet.create({
   },
   instructionImage: {
     width: '100%',
-    height: 200,
+    maxWidth: 480,
+    height: 340,
+    maxHeight: 520,
     resizeMode: 'contain',
   },
 });

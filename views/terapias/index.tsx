@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Dimensions , Platform} from 'react-native';
 import Navegacao from '../../features/navegacao/navegacao';
 
 const { width, height } = Dimensions.get('window');
@@ -15,7 +15,7 @@ export default function ViewTerapias({ navigation }: any) {
       />
       <ScrollView 
         contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={Platform.OS === 'web'}
       >
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>Selecione a opção que</Text>
@@ -104,6 +104,8 @@ const styles = StyleSheet.create({
   buttonImage: {
     height: 180,
     width: '80%',
+    maxWidth: 320,
+    maxHeight: 190,
     resizeMode: 'contain',
   },
 });

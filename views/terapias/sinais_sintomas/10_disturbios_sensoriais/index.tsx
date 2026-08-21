@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Navegacao from '../../../../features/navegacao/navegacao';
 
@@ -16,7 +16,7 @@ export default function ViewDisturbiosSensoriaisSinaisSintomas({ navigation }: a
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           {/* Badge Principal */}
           <View style={styles.mainBadge}>
@@ -146,6 +146,8 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     width: '60%',
+    maxWidth: 341,
+    maxHeight: 341,
     aspectRatio: 1,
     marginVertical: 15,
     alignItems: 'center',
@@ -154,6 +156,8 @@ const styles = StyleSheet.create({
   illustrationImage: {
     width: '100%',
     height: '100%',
+    maxWidth: 341,
+    maxHeight: 341,
     resizeMode: 'contain',
   },
   cardSection: {

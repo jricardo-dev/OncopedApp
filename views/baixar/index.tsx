@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity , Platform} from 'react-native';
 import Navegacao from '../../features/navegacao/navegacao';
 import { openSafeUrl } from '../../utils/security';
 
@@ -29,7 +29,7 @@ export default function ViewBaixar({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           <View style={styles.bannerContainer}> 
             <View style={styles.bannerButton}>
@@ -136,13 +136,16 @@ const styles = StyleSheet.create({
   },
   cardItem: {
     width: '45%',
-    marginVertical: 10,
+    maxWidth: 260,
+    marginVertical: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
   cardImage: {
     width: '100%',
-    height: 130,
+    aspectRatio: 1,
+    maxWidth: 260,
+    maxHeight: 260,
     resizeMode: 'contain',
   },
 });

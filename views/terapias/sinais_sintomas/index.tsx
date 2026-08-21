@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity , Platform} from 'react-native';
 import Navegacao from '../../../features/navegacao/navegacao';
 
 const SYMPTOMS = [
@@ -40,7 +40,7 @@ export default function ViewSinaisSintomas({ navigation }: any) {
       <View style={styles.menuContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           <View style={styles.titleContainer}>
             <Text style={styles.instructionText}>Selecione a opção</Text>
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 220,
     width: '60%',
+    maxWidth: 240,
+    maxHeight: 240,
     resizeMode: 'contain',
   },
   menuContainer: {

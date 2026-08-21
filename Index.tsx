@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, BackHandler, Platform } from 'react-native';
 import { NavigationContainer, createNavigationContainerRef, useNavigation } from '@react-navigation/native';
 import { 
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList
+  DrawerItemList,
+  DrawerToggleButton,
 } from '@react-navigation/drawer';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -42,6 +43,7 @@ import ViewPassosNutricao from './views/nutricao/01_passos';
 import ViewMitosNutricao from './views/nutricao/02_mitos';
 import ViewSondasNutricao from './views/nutricao/03_sondas';
 import ViewBaixar from './views/baixar';
+import WebTopNavigationBar from './components/WebTopNavigationBar';
 
 import { ViewReturnedInBackPress } from './features/backpress/returnedback';
 import { useAppDispatch, useAppSelector } from './app/hooks/hooks';
@@ -235,14 +237,16 @@ function CustomDrawerContent(props: any) {
         </TouchableOpacity>        
       </View>
 
-      {/* Botão Sair */}
-      <TouchableOpacity
-        style={styles.exitButton}
-        activeOpacity={0.7}
-        onPress={() => BackHandler.exitApp()}
-      >
-        <Text style={styles.exitButtonText}>Sair</Text>
-      </TouchableOpacity>
+      {/* Botão Sair - apenas em plataformas mobile */}
+      {Platform.OS !== 'web' && (
+        <TouchableOpacity
+          style={styles.exitButton}
+          activeOpacity={0.7}
+          onPress={() => BackHandler.exitApp()}
+        >
+          <Text style={styles.exitButtonText}>Sair</Text>
+        </TouchableOpacity>
+      )}
 
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
@@ -259,6 +263,7 @@ const styles = StyleSheet.create({
   },
   drawerHeaderLogo: {
     width: '80%',
+    maxWidth: 240,
     height: 140,
     resizeMode: 'contain',
   },
@@ -333,8 +338,50 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
     textTransform: 'uppercase',
-  }
+  },
+  mainContainer: {
+    flex: 1,
+  },
+  drawerToggleTouchable: {
+    padding: 12,
+    marginLeft: 12,
+    marginTop: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer' as any,
+  },
+  hamburgerBar: {
+    width: 24,
+    height: 3,
+    backgroundColor: '#ffffff',
+    borderRadius: 2,
+    marginVertical: 2.5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 3,
+  },
 });
+
+function CustomDrawerButton() {
+  const navigation = useNavigation<any>();
+  return (
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel="Menu"
+      activeOpacity={0.7}
+      style={styles.drawerToggleTouchable}
+      onPress={() => {
+        navigation.toggleDrawer();
+      }}
+    >
+      <View style={styles.hamburgerBar} />
+      <View style={styles.hamburgerBar} />
+      <View style={styles.hamburgerBar} />
+    </TouchableOpacity>
+  );
+}
 
 export default function Main() {
   const dispatch = useAppDispatch();    
@@ -344,8 +391,9 @@ export default function Main() {
   useEffect(() => {
     const onBackPress = () => {
       if (ready) {
-        const nav = ViewReturnedInBackPress(viewSel!.id);
-        if (nav.id > -1) {
+        const currentId = viewSel?.id ?? 0;
+        const nav = ViewReturnedInBackPress(currentId);
+        if (nav && nav.id > -1) {
           console.log('back press', nav);
           dispatch(alterarPagina(nav));
           if (navigationRef.isReady()) {
@@ -375,20 +423,31 @@ export default function Main() {
         setReady(true);
       }}
     >
-      <Drawer.Navigator 
-        id="LeftDrawer"
-        initialRouteName="TelaInicial"
-        backBehavior='none'
-        detachInactiveScreens={true}
-        screenOptions={{
-          headerTintColor: '#fff',            
-          drawerPosition: 'left',
-          drawerStyle: { height: '100%' },
-          headerTransparent: true,
-          drawerItemStyle: { display: 'none' },
-        }}          
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >          
+      <View style={styles.mainContainer}>
+        {Platform.OS === 'web' && <WebTopNavigationBar />}
+        <Drawer.Navigator 
+          id="LeftDrawer"
+          initialRouteName="TelaInicial"
+          backBehavior='none'
+          detachInactiveScreens={true}
+          screenOptions={{
+            headerShown: true,
+            headerTintColor: '#ffffff',            
+            drawerPosition: 'left',
+            drawerStyle: { height: '100%', width: 280 },
+            headerTransparent: true,
+            headerTitle: () => null,
+            drawerItemStyle: { display: 'none' },
+            headerStyle: {
+              backgroundColor: 'transparent',
+              elevation: 0,
+              shadowOpacity: 0,
+              zIndex: 10000,
+            },
+            headerLeft: () => <CustomDrawerButton />,
+          }}          
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+        >          
         <Drawer.Screen
           name="TelaInicial"
           component={TelaInicial}
@@ -555,6 +614,7 @@ export default function Main() {
           options={{ title: 'Baixar', headerTitleStyle: { display: 'none' } }}
         />
       </Drawer.Navigator>
+      </View>
     </NavigationContainer>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import Navegacao from '../../../features/navegacao/navegacao';
 
 const MITOS = [
@@ -42,7 +42,7 @@ export default function ViewMitosNutricao({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           {/* Badge Principal */}
           <View style={styles.mainBadge}>
@@ -141,8 +141,10 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   mitoImage: {
-    width: '65%',
-    height: 160,
+    width: '75%',
+    maxWidth: 440,
+    height: 220,
+    maxHeight: 320,
     resizeMode: 'contain',
     marginBottom: 10,
   },

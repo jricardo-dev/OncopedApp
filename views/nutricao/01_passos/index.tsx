@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Navegacao from '../../../features/navegacao/navegacao';
 
@@ -16,7 +16,7 @@ export default function ViewPassosNutricao({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           {/* Badge Principal */}
           <View style={styles.mainBadge}>
@@ -223,8 +223,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   stepImage: {
-    width: '75%',
-    height: 180,
+    width: '85%',
+    maxWidth: 480,
+    height: 240,
+    maxHeight: 340,
     resizeMode: 'contain',
     marginBottom: 10,
   },

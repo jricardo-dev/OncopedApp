@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import Navegacao from '../../../../features/navegacao/navegacao';
 
 const SIDE_EFFECT_IMAGES = [
@@ -23,7 +23,7 @@ export default function ViewOQueEsperarRadioterapia({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           <View style={styles.sectionContainer}> 
             <View style={styles.badgeButton}>
@@ -146,13 +146,15 @@ const styles = StyleSheet.create({
   },
   imageItemContainer: {
     width: '85%',
-    marginVertical: 6,
+    maxWidth: 373,
+    marginVertical: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },
   effectImage: {
     width: '100%',
-    height: 180,
+    maxWidth: 373,
+    height: 142,
     resizeMode: 'contain',
   },
 });

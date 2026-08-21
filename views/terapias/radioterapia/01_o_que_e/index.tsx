@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, Text, ScrollView , Platform} from 'react-native';
 import Navegacao from '../../../../features/navegacao/navegacao';
 
 export default function ViewOQueEhRadioterapia({ navigation }: any) {
@@ -15,7 +15,7 @@ export default function ViewOQueEhRadioterapia({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           <View style={styles.imageContainer}>
             <Image               
@@ -88,8 +88,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   heroImage: {
-    height: 220,     
+    height: 240,     
     width: '80%',
+    maxWidth: 380,
+    maxHeight: 360,
     resizeMode: 'contain',
   },
   cardWrapper: {

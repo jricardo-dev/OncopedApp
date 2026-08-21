@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text , Platform} from 'react-native';
 import Navegacao from '../../../../features/navegacao/navegacao';
 
 export default function ViewComoEhFeitaRadioterapia({ navigation }: any) {
@@ -15,7 +15,7 @@ export default function ViewComoEhFeitaRadioterapia({ navigation }: any) {
       <View style={styles.contentContainer}>
         <ScrollView 
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={Platform.OS === 'web'}
         >
           <View style={styles.mainBadgeContainer}> 
             <View style={styles.mainBadgeButton}>
@@ -139,7 +139,9 @@ const styles = StyleSheet.create({
   },
   stepImage: {
     width: '100%',
-    height: 180,
+    maxWidth: 419,
+    height: 240,
+    maxHeight: 350,
     resizeMode: 'contain',
     marginBottom: 10,
   },
